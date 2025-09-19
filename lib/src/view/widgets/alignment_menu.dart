@@ -27,26 +27,30 @@ class AlignmentMenu extends StatefulWidget {
 class _AlignmentMenuState extends State<AlignmentMenu> {
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: primaryColor),
-          borderRadius: BorderRadius.circular(8),
+    return RadioGroup(
+      onChanged: (value) {},
+      groupValue: widget.notificationAlignment,
+      child: PopupMenuButton(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: primaryColor),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Center(child: Text(widget.title)),
         ),
-        padding: const EdgeInsets.all(16),
-        child: Center(child: Text(widget.title)),
+        itemBuilder: (_) => [
+          _radioButton('BottomCenter', Alignment.bottomCenter),
+          _radioButton('BottomLeft', Alignment.bottomLeft),
+          _radioButton('BottomRight', Alignment.bottomRight),
+          _radioButton('Center', Alignment.center),
+          _radioButton('CenterLeft', Alignment.centerLeft),
+          _radioButton('CenterRight', Alignment.centerRight),
+          _radioButton('TopCenter', Alignment.topCenter),
+          _radioButton('TopLeft', Alignment.topLeft),
+          _radioButton('TopRight', Alignment.topRight),
+        ],
       ),
-      itemBuilder: (_) => [
-        _radioButton('BottomCenter', Alignment.bottomCenter),
-        _radioButton('BottomLeft', Alignment.bottomLeft),
-        _radioButton('BottomRight', Alignment.bottomRight),
-        _radioButton('Center', Alignment.center),
-        _radioButton('CenterLeft', Alignment.centerLeft),
-        _radioButton('CenterRight', Alignment.centerRight),
-        _radioButton('TopCenter', Alignment.topCenter),
-        _radioButton('TopLeft', Alignment.topLeft),
-        _radioButton('TopRight', Alignment.topRight),
-      ],
     );
   }
 
@@ -64,8 +68,6 @@ class _AlignmentMenuState extends State<AlignmentMenu> {
         title: Text(text),
         leading: Radio<Alignment>(
           value: notificationAlignment,
-          groupValue: widget.notificationAlignment,
-          onChanged: (_) {},
         ),
       ),
     );

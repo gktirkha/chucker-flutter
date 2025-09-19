@@ -1,6 +1,5 @@
 import 'package:chucker_flutter/src/helpers/extensions.dart';
 import 'package:chucker_flutter/src/localization/localization.dart';
-
 import 'package:chucker_flutter/src/view/helper/colors.dart';
 import 'package:chucker_flutter/src/view/helper/http_methods.dart';
 import 'package:flutter/material.dart';
@@ -27,37 +26,41 @@ class HttpMethodsMenu extends StatefulWidget {
 class _HttpMethodsMenuState extends State<HttpMethodsMenu> {
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(
-      child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          border: Border.all(color: primaryColor),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Http Method: '),
-              Chip(
-                label: Text(
-                  _getMethodName(),
-                  style: context.textTheme.bodyLarge!.withColor(Colors.white),
+    return RadioGroup(
+      onChanged: (value) {},
+      groupValue: widget.httpMethod,
+      child: PopupMenuButton(
+        child: Container(
+          height: 48,
+          decoration: BoxDecoration(
+            border: Border.all(color: primaryColor),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Http Method: '),
+                Chip(
+                  label: Text(
+                    _getMethodName(),
+                    style: context.textTheme.bodyLarge!.withColor(Colors.white),
+                  ),
+                  backgroundColor: methodColor(_getMethodName()),
                 ),
-                backgroundColor: methodColor(_getMethodName()),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+        itemBuilder: (_) => [
+          _radioButton(Localization.strings['all']!, HttpMethod.none),
+          _radioButton('GET', HttpMethod.get),
+          _radioButton('POST', HttpMethod.post),
+          _radioButton('PUT', HttpMethod.put),
+          _radioButton('PATCH', HttpMethod.patch),
+          _radioButton('DELETE', HttpMethod.delete),
+        ],
       ),
-      itemBuilder: (_) => [
-        _radioButton(Localization.strings['all']!, HttpMethod.none),
-        _radioButton('GET', HttpMethod.get),
-        _radioButton('POST', HttpMethod.post),
-        _radioButton('PUT', HttpMethod.put),
-        _radioButton('PATCH', HttpMethod.patch),
-        _radioButton('DELETE', HttpMethod.delete),
-      ],
     );
   }
 
@@ -75,8 +78,6 @@ class _HttpMethodsMenuState extends State<HttpMethodsMenu> {
         title: Text(text),
         leading: Radio<HttpMethod>(
           value: httpMethod,
-          groupValue: widget.httpMethod,
-          onChanged: (HttpMethod? value) {},
         ),
       ),
     );

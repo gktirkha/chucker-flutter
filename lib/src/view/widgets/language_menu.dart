@@ -24,16 +24,20 @@ class LanguagesMenu extends StatefulWidget {
 class _LanguagesMenuState extends State<LanguagesMenu> {
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton(
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: primaryColor),
-          borderRadius: BorderRadius.circular(8),
+    return RadioGroup(
+      onChanged: (value) {},
+      groupValue: widget.language,
+      child: PopupMenuButton(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: primaryColor),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Center(child: Text(widget.language.name)),
         ),
-        padding: const EdgeInsets.all(16),
-        child: Center(child: Text(widget.language.name)),
+        itemBuilder: (_) => Language.values.map(_radioButton).toList(),
       ),
-      itemBuilder: (_) => Language.values.map(_radioButton).toList(),
     );
   }
 
@@ -48,8 +52,6 @@ class _LanguagesMenuState extends State<LanguagesMenu> {
         title: Text(language.name),
         leading: Radio<Language>(
           value: language,
-          groupValue: widget.language,
-          onChanged: (_) {},
         ),
       ),
     );
