@@ -170,7 +170,13 @@ class ChuckerFlutter {
   ///  ...,
   ///)
   ///```
-  static final navigatorKey = GlobalKey<NavigatorState>();
+  ///
+  ///If your app already has its own root navigator key, assign it instead:
+  ///
+  ///```dart
+  ///ChuckerFlutter.navigatorKey = myAppNavigatorKey;
+  ///```
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   ///[navigatorObserver] observes the navigation of your app.
   ///
