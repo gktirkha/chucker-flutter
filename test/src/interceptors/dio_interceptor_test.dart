@@ -196,17 +196,19 @@ void main() {
     dioAdapter
       ..onGet('/created', (s) => s.reply(201, {'id': 1}))
       ..onGet('/notfound', (s) => s.reply(404, {'error': 'not found'}))
-      ..onGet('/servererror',
-          (s) => s.reply(500, {'error': 'server error'}),);
+      ..onGet(
+        '/servererror',
+        (s) => s.reply(500, {'error': 'server error'}),
+      );
 
     await dio.get<dynamic>('/created');
-    
+
     try {
       await dio.get<dynamic>('/notfound');
     } catch (e) {
       // Expected error
     }
-    
+
     try {
       await dio.get<dynamic>('/servererror');
     } catch (e) {

@@ -79,7 +79,7 @@ void main() {
 
       // Should not throw when tapped
       expect(find.byType(ElevatedButton), findsOneWidget);
-      
+
       // The button should be tappable (checking it doesn't throw)
       final elevatedButton = tester.widget<ElevatedButton>(
         find.byType(ElevatedButton),

@@ -148,8 +148,7 @@ void main() {
       expect(find.byType(Text), findsNWidgets(2)); // title and stats
     });
 
-    testWidgets('should handle long stats string',
-        (WidgetTester tester) async {
+    testWidgets('should handle long stats string', (WidgetTester tester) async {
       const title = 'Long Stats';
       const stats = '123456789';
 
